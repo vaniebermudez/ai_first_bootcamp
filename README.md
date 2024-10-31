@@ -5,4 +5,5 @@ Day 1
 Day 2
 
 Day 3
-Streamlit App: https://aifirstbootcamp-news-summarizer.streamlit.app/
+Activit 4: https://aifirstbootcamp-van-news-summarizer.streamlit.app/
+Activity 6: https://aifirstbootcamp-surepath-urfinancialguide.streamlit.app/
