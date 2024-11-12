@@ -35,14 +35,13 @@ def initialize_rag():
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
         splits = text_splitter.split_documents(documents)
         
-        # Create embeddings and vector store
-        embeddings = OpenAIEmbeddings()
+        # Create embeddings and vector store with API key
+        embeddings = OpenAIEmbeddings(openai_api_key=openai.api_key)
         vectorstore = FAISS.from_documents(splits, embeddings)
         
         return vectorstore
     except Exception as e:
         st.error(f"Error loading dataset: {str(e)}")
-        # Return a default or empty vectorstore, or handle the error appropriately
         return None
 
 # Then define initialize_conversation
@@ -51,21 +50,37 @@ def initialize_conversation(prompt):
         st.session_state.message = []
         st.session_state.message.append({"role": "system", "content": System_Prompt})
         
+    # Check if API key is available
+    if not openai.api_key:
+        st.warning("Please enter your OpenAI API key first!")
+        return
+        
     # Initialize RAG components if not already initialized
     if 'vectorstore' not in st.session_state:
-        st.session_state.vectorstore = initialize_rag()
+        vectorstore = initialize_rag()
+        if vectorstore is None:
+            st.error("Failed to initialize RAG components. Please check your dataset.")
+            return
+        st.session_state.vectorstore = vectorstore
     
     # Initialize qa_chain if not already initialized
     if 'qa_chain' not in st.session_state:
-        # Create ChatOpenAI instance
-        llm = ChatOpenAI(model="gpt-4", temperature=0.5)
-        
-        # Create ConversationalRetrievalChain
-        st.session_state.qa_chain = ConversationalRetrievalChain.from_llm(
-            llm=llm,
-            retriever=st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3}),
-            return_source_documents=True,
-        )
+        try:
+            # Create ChatOpenAI instance with the API key
+            llm = ChatOpenAI(
+                model="gpt-4", 
+                temperature=0.5,
+                openai_api_key=openai.api_key  # Pass the API key here
+            )
+            
+            # Create ConversationalRetrievalChain
+            st.session_state.qa_chain = ConversationalRetrievalChain.from_llm(
+                llm=llm,
+                retriever=st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3}),
+                return_source_documents=True,
+            )
+        except Exception as e:
+            st.error(f"Error initializing QA chain: {str(e)}")
 
 with st.sidebar:
     try:
