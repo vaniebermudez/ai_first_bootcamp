@@ -65,7 +65,7 @@ if options == "Home" :
 elif options == "About Us" :
      st.title("About Us")
      st.write("# Vanessa Althea Bermudez")
-    #  st.image('images/vanie.jpg')
+     st.image('images/vanie.png')
      st.write("## AI Enthusiast / Data Scientist")
      st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
      st.text("Github : https://github.com/vaniebermudez/")
@@ -162,7 +162,7 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
 
 def initialize_rag():
     # Load and process the inventory dataset
-    loader = CSVLoader('inventory_products_dataset.csv')  # Replace with your CSV path
+    loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')  # Replace with your CSV path
     documents = loader.load()
     
     # Split documents into chunks
