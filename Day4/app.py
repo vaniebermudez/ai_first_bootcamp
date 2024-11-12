@@ -59,8 +59,8 @@ if 'chat_session' not in st.session_state:
 # Options : Home
 if options == "Home" :
 
-   st.title("Chat with SurePath : Your Personal Financial Guide!")
-   st.write("Hello! I'm SurePath, your personal financial guide. I’m here to help you make smart, confident decisions about your insurance and investments. Whether you're just starting out or looking to optimize your financial portfolio, I’ll recommend options that fit your unique goals, risk comfort, and budget. Let’s work together to create a secure, prosperous path toward your future!")
+   st.title("InvyTrack: Your Smart Partner for Real-Time Inventory Precision")
+   st.write("Welcome to InvyTrack, your comprehensive, AI-powered solution for real-time inventory management. Designed with cutting-edge technology, InvyTrack ensures that your supply chain runs seamlessly by providing instant insights, proactive alerts, and efficient stock control. Whether you're managing multiple warehouses or tracking a diverse product range, InvyTrack empowers you with the tools to optimize operations, reduce costs, and maintain perfect inventory levels. Say goodbye to manual errors and outdated systems—experience the future of supply chain management with InvyTrack, where precision meets innovation.")
    
 elif options == "About Us" :
      st.title("About Us")
