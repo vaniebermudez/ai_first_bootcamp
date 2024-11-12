@@ -27,7 +27,7 @@ st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inven
 # First, define the initialize_rag function
 def initialize_rag():
     # Load and process the inventory dataset
-    loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')
+    loader = CSVLoader('inventory_products_dataset.csv')
     documents = loader.load()
     
     # Split documents into chunks
