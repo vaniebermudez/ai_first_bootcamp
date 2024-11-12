@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
 with st.sidebar :
-    st.image('images/invytrack.png')
+    # st.image('images/invytrack.png')
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
     if not (openai.api_key.startswith('sk-') and len(openai.api_key)==164):
         st.warning('Please enter your OpenAI API token!', icon='⚠️')
@@ -65,7 +65,7 @@ if options == "Home" :
 elif options == "About Us" :
      st.title("About Us")
      st.write("# Vanessa Althea Bermudez")
-     st.image('images/vanie.png')
+    #  st.image('images/vanie.png')
      st.write("## AI Enthusiast / Data Scientist")
      st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
      st.text("Github : https://github.com/vaniebermudez/")
