@@ -25,7 +25,10 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
 with st.sidebar :
-    st.image('images/invytrack.png')
+    try:
+        st.image('/images/invytrack.png')
+    except:
+        st.title("InvyTrack")  # Fallback title if image is missing
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
     if not (openai.api_key.startswith('sk-') and len(openai.api_key)==164):
         st.warning('Please enter your OpenAI API token!', icon='⚠️')
@@ -65,7 +68,10 @@ if options == "Home" :
 elif options == "About Us" :
      st.title("About Us")
      st.write("# Vanessa Althea Bermudez")
-     st.image('images/vanie.png')
+     try:
+        st.image('images/vanie.png')
+     except:
+        st.write('Vanie Bermudez')
      st.write("## AI Enthusiast / Data Scientist")
      st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
      st.text("Github : https://github.com/vaniebermudez/")
@@ -114,10 +120,12 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
              st.session_state.message = []
              st.session_state.message.append({"role": "system", "content": System_Prompt})
              
-             # Initialize RAG components
-             if 'vectorstore' not in st.session_state:
-                 st.session_state.vectorstore = initialize_rag()
-             
+         # Initialize RAG components if not already initialized
+         if 'vectorstore' not in st.session_state:
+             st.session_state.vectorstore = initialize_rag()
+         
+         # Initialize qa_chain if not already initialized
+         if 'qa_chain' not in st.session_state:
              # Create ChatOpenAI instance
              llm = ChatOpenAI(model="gpt-4", temperature=0.5)
              
