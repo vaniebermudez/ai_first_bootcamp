@@ -64,7 +64,7 @@ if options == "Home" :
 elif options == "About Us" :
      st.title("About Us")
      st.write("# Vanessa Althea Bermudez")
-     st.image('https://github.com/vaniebermudez/ai_first_bootcamp/blob/main/Day4/images/vanie.png')
+     st.image('images\\vanie.png')
      st.write("## AI Enthusiast / Data Scientist")
      st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
      st.text("Github : https://github.com/vaniebermudez/")
