@@ -138,7 +138,7 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
               st.markdown(user_message)
          query_embedding = get_embedding(user_message, engine='text-embedding-3-small')
          query_embedding_np = np.array([query_embedding]).astype('float32')
-         _, indices = index.search(query_embedding_np, 2)
+         _, indices = index.search(query_embedding_np, 20)
          retrieved_docs = [documents[i] for i in indices[0]]
          context = ' '.join(retrieved_docs)
          structured_prompt = f"Context:\n{context}\n\nQuery:\n{user_message}\n\nResponse:"
