@@ -11,9 +11,6 @@ from langchain.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from openai.embeddings_utils import get_embedding
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import FAISS
-from langchain.chains import ConversationalRetrievalChain
 import faiss
 import streamlit as st
 import warnings
@@ -24,69 +21,8 @@ warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
-# First, define the initialize_rag function
-def initialize_rag():
-    try:
-        # Load and process the inventory dataset using the direct URL
-        loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/main/Day4/inventory_products_dataset.csv')
-        documents = loader.load()
-        
-        # Split documents into chunks
-        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-        splits = text_splitter.split_documents(documents)
-        
-        # Create embeddings and vector store with API key
-        embeddings = OpenAIEmbeddings(openai_api_key=openai.api_key)
-        vectorstore = FAISS.from_documents(splits, embeddings)
-        
-        return vectorstore
-    except Exception as e:
-        st.error(f"Error loading dataset: {str(e)}")
-        return None
-
-# Then define initialize_conversation
-def initialize_conversation(prompt):
-    if 'message' not in st.session_state:
-        st.session_state.message = []
-        st.session_state.message.append({"role": "system", "content": System_Prompt})
-        
-    # Check if API key is available
-    if not openai.api_key:
-        st.warning("Please enter your OpenAI API key first!")
-        return
-        
-    # Initialize RAG components if not already initialized
-    if 'vectorstore' not in st.session_state:
-        vectorstore = initialize_rag()
-        if vectorstore is None:
-            st.error("Failed to initialize RAG components. Please check your dataset.")
-            return
-        st.session_state.vectorstore = vectorstore
-    
-    # Initialize qa_chain if not already initialized
-    if 'qa_chain' not in st.session_state:
-        try:
-            # Create ChatOpenAI instance with the API key
-            llm = ChatOpenAI(
-                model="gpt-4", 
-                temperature=0.5,
-                openai_api_key=openai.api_key  # Pass the API key here
-            )
-            
-            # Create ConversationalRetrievalChain
-            st.session_state.qa_chain = ConversationalRetrievalChain.from_llm(
-                llm=llm,
-                retriever=st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3}),
-                return_source_documents=True,
-            )
-        except Exception as e:
-            st.error(f"Error initializing QA chain: {str(e)}")
-
-with st.sidebar:
-    try:
-        st.image('images/invytrack.png')
-    except:
-        st.title("InvyTrack")  # Fallback title if image is missing
+with st.sidebar :
+    st.image('images/invytack.png')
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
     if not (openai.api_key.startswith('sk-') and len(openai.api_key)==164):
         st.warning('Please enter your OpenAI API token!', icon='⚠️')
@@ -111,8 +47,8 @@ with st.sidebar:
         })
 
 
-if 'messages' not in st.session_state:
-    st.session_state.messages = []
+if 'messagess' not in st.session_state:
+    st.session_state.messagess = []
 
 if 'chat_session' not in st.session_state:
     st.session_state.chat_session = None  # Placeholder for your chat session initialization
@@ -120,23 +56,31 @@ if 'chat_session' not in st.session_state:
 # Options : Home
 if options == "Home" :
 
-   st.title("InvyTrack: Your Smart Partner for Real-Time Inventory Precision")
-   st.write("Welcome to InvyTrack, your comprehensive, AI-powered solution for real-time inventory management. Designed with cutting-edge technology, InvyTrack ensures that your supply chain runs seamlessly by providing instant insights, proactive alerts, and efficient stock control. Whether you're managing multiple warehouses or tracking a diverse product range, InvyTrack empowers you with the tools to optimize operations, reduce costs, and maintain perfect inventory levels. Say goodbye to manual errors and outdated systems—experience the future of supply chain management with InvyTrack, where precision meets innovation.")
+   st.title("Welcome to InvyTrack, your comprehensive, AI-powered solution for real-time inventory management.")
+   st.write("Designed with cutting-edge technology, InvyTrack ensures that your supply chain runs seamlessly by providing instant insights, proactive alerts, and efficient stock control.")
+   st.write("Whether you're managing multiple warehouses or tracking a diverse product range, InvyTrack empowers you with the tools to optimize operations, reduce costs, and maintain perfect inventory levels.")
+   st.write("Say goodbye to manual errors and outdated systems—experience the future of supply chain management with InvyTrack, where precision meets innovation.")
    
 elif options == "About Us" :
      st.title("About Us")
      st.write("# Vanessa Althea Bermudez")
-     try:
-        st.image('images/vanie.png')
-     except:
-        st.write('Vanie Bermudez')
+     st.image('images/vanie.png')
      st.write("## AI Enthusiast / Data Scientist")
      st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
      st.text("Github : https://github.com/vaniebermudez/")
      st.write("\n")
 
-
+# Options : Model
 elif options == "Model" :
+     dataframed = pd.read_csv('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')
+     dataframed['combined'] = dataframed.apply(lambda row : ' '.join(row.values.astype(str)), axis = 1)
+     documents = dataframed['combined'].tolist()
+     embeddings = [get_embedding(doc, engine = "text-embedding-3-small") for doc in documents]
+     embedding_dim = len(embeddings[0])
+     embeddings_np = np.array(embeddings).astype('float32')
+     index = faiss.IndexFlatL2(embedding_dim)
+     index.add(embeddings_np)
+
      System_Prompt = """
 Role:
 You are an intelligent data assistant specialized in inventory management for a manufacturing company. Your role is to create, manage, and provide insights on inventory datasets to enhance the company’s operational efficiency.
@@ -173,34 +117,34 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
 """
 
 
+     def initialize_conversation(prompt):
+         if 'messagess' not in st.session_state:
+             st.session_state.messagess = []
+             st.session_state.messagess.append({"role": "system", "content": System_Prompt})
+             chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess, temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
+             response = chat.choices[0].message.content
+             st.session_state.messagess.append({"role": "assistant", "content": response})
+
      initialize_conversation(System_Prompt)
 
-     for messages in st.session_state.message :
-         if messages['role'] == 'system' : continue 
-         else :
+     for messages in st.session_state.messagess :
+          if messages['role'] == 'system' : continue 
+          else :
             with st.chat_message(messages["role"]):
                  st.markdown(messages["content"])
 
      if user_message := st.chat_input("Say something"):
-        with st.chat_message("user"):
-             st.markdown(user_message)
-        st.session_state.message.append({"role": "user", "content": user_message})
-        
-        # Get chat history for context
-        chat_history = [(msg["content"], st.session_state.message[i+1]["content"]) 
-                        for i, msg in enumerate(st.session_state.message[:-1]) 
-                        if msg["role"] == "user"]
-        
-        # Get response using RAG
-        result = st.session_state.qa_chain({"question": user_message, "chat_history": chat_history})
-        response = result["answer"]
-        
-        with st.chat_message("assistant"):
-            st.markdown(response)
-            # Optionally display sources
-            if "source_documents" in result:
-                with st.expander("Sources"):
-                    for doc in result["source_documents"]:
-                        st.write(doc.page_content)
-        
-        st.session_state.message.append({"role": "assistant", "content": response})
+         with st.chat_message("user"):
+              st.markdown(user_message)
+         query_embedding = get_embedding(user_message, engine='text-embedding-3-small')
+         query_embedding_np = np.array([query_embedding]).astype('float32')
+         _, indices = index.search(query_embedding_np, 2)
+         retrieved_docs = [documents[i] for i in indices[0]]
+         context = ' '.join(retrieved_docs)
+         structured_prompt = f"Context:\n{context}\n\nQuery:\n{user_message}\n\nResponse:"
+         chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess + [{"role": "user", "content": structured_prompt}], temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
+         st.session_state.messagess.append({"role": "user", "content": user_message})
+         response = chat.choices[0].message.content
+         with st.chat_message("assistant"):
+              st.markdown(response)
+         st.session_state.messagess.append({"role": "assistant", "content": response})
