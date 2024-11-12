@@ -26,19 +26,24 @@ st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inven
 
 # First, define the initialize_rag function
 def initialize_rag():
-    # Load and process the inventory dataset
-    loader = CSVLoader('inventory_products_dataset.csv')
-    documents = loader.load()
-    
-    # Split documents into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-    splits = text_splitter.split_documents(documents)
-    
-    # Create embeddings and vector store
-    embeddings = OpenAIEmbeddings()
-    vectorstore = FAISS.from_documents(splits, embeddings)
-    
-    return vectorstore
+    try:
+        # Load and process the inventory dataset using the direct URL
+        loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/main/Day4/inventory_products_dataset.csv')
+        documents = loader.load()
+        
+        # Split documents into chunks
+        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+        splits = text_splitter.split_documents(documents)
+        
+        # Create embeddings and vector store
+        embeddings = OpenAIEmbeddings()
+        vectorstore = FAISS.from_documents(splits, embeddings)
+        
+        return vectorstore
+    except Exception as e:
+        st.error(f"Error loading dataset: {str(e)}")
+        # Return a default or empty vectorstore, or handle the error appropriately
+        return None
 
 # Then define initialize_conversation
 def initialize_conversation(prompt):
