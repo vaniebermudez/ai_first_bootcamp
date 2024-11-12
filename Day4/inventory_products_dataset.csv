@@ -1,0 +1,21 @@
+﻿Product ID,Product Name,Category,SKU,Description,Supplier Name,Quantity in Stock,Reorder Level,Reorder Quantity,Unit Price,Total Inventory Value,Location,Date of Last Restock,Lead Time,Expiration Date,Batch Number,Condition,Barcode
+1,Widget A,Hardware,WID123,High-quality metal widget,ABC Supplies,500,100,200,$5,$2500,Warehouse 1,11/01/2024,7 days,N/A,BATCH001,New,QR001
+2,Bolt Pack,Fasteners,BOLT456,Set of 50 steel bolts,XYZ Fasteners,250,50,100,$2,$500,Warehouse 2,10/30/2024,5 days,N/A,BATCH002,New,QR002
+3,Adhesive Tape,Supplies,TAP789,Industrial adhesive tape,TapeTech Inc.,150,30,50,$3,$450,Warehouse 3,11/05/2024,3 days,N/A,BATCH003,New,QR003
+4,Safety Goggles,Safety Gear,SAF001,Protective eyewear,SafeWare Ltd.,75,20,50,$8,$600,Warehouse 1,11/02/2024,10 days,N/A,BATCH004,New,QR004
+5,Welding Rods,Welding,WEL123,High-strength welding rods,WeldCo Supplies,120,40,80,$10,$1200,Warehouse 2,11/01/2024,15 days,N/A,BATCH005,New,QR005
+6,Drill Bit Set,Tools,DRI456,10-piece drill bit set,ToolMasters Inc.,200,50,100,$15,$3000,Warehouse 3,10/29/2024,8 days,N/A,BATCH006,New,QR006
+7,Electrical Wire,Electrical,ELE789,100m spool of copper wire,Electra Corp.,400,100,200,$20,$8000,Warehouse 1,11/04/2024,12 days,N/A,BATCH007,New,QR007
+8,Hammer,Tools,HAM001,Heavy-duty hammer,HammerWorks Co.,90,20,50,$7,$630,Warehouse 3,11/03/2024,5 days,N/A,BATCH008,New,QR008
+9,Paint Can (1L),Paints,PAI123,1-liter can of paint,ColorWorld,300,75,150,$12,$3600,Warehouse 2,11/01/2024,10 days,04/01/2025,BATCH009,New,QR009
+10,Sandpaper Pack,Supplies,SAN456,Assorted sandpaper sheets,SmoothTech,500,100,250,$1,$500,Warehouse 1,11/06/2024,4 days,N/A,BATCH010,New,QR010
+11,Measuring Tape,Tools,TAP123,5m measuring tape,MeasureMax Inc.,180,40,80,$4,$720,Warehouse 2,11/02/2024,7 days,N/A,BATCH011,New,QR011
+12,Gloves (Pair),Safety Gear,GLO456,Durable safety gloves,HandShield Ltd.,60,20,30,$6,$360,Warehouse 3,10/28/2024,6 days,N/A,BATCH012,New,QR012
+13,Wrench Set,Tools,WRE789,8-piece wrench set,FixIt Tools,70,20,50,$18,$1260,Warehouse 1,11/04/2024,14 days,N/A,BATCH013,New,QR013
+14,Steel Pipes (1m),Hardware,PIP123,1-meter steel pipe,MetalWorks Co.,250,60,100,$25,$6250,Warehouse 2,10/31/2024,10 days,N/A,BATCH014,New,QR014
+15,Screwdriver Set,Tools,SCR001,Precision screwdriver set,ToolHub Inc.,150,50,75,$9,$1350,Warehouse 3,11/03/2024,5 days,N/A,BATCH015,New,QR015
+16,Mask (N95),Safety Gear,MAS789,N95 protective mask,SafeBreath Corp.,300,80,150,$2,$600,Warehouse 1,11/05/2024,3 days,02/01/2025,BATCH016,New,QR016
+17,Aluminum Sheets,Raw Material,ALU123,1m x 1m aluminum sheet,AluForm Inc.,100,30,50,$35,$3500,Warehouse 2,10/30/2024,10 days,N/A,BATCH017,New,QR017
+18,PVC Pipes (2m),Hardware,PVC456,2-meter PVC pipe,PipeFlow Ltd.,80,20,40,$15,$1200,Warehouse 3,10/28/2024,8 days,N/A,BATCH018,New,QR018
+19,Insulation Foam,Supplies,FOA789,Thermal insulation foam,FoamGuard Ltd.,400,100,200,$10,$4000,Warehouse 1,11/04/2024,7 days,01/15/2025,BATCH019,New,QR019
+20,Cable Ties Pack,Electrical,CAB001,Pack of 100 cable ties,Electra Corp.,600,150,300,$1,$600,Warehouse 2,11/02/2024,5 days,N/A,BATCH020,New,QR020
