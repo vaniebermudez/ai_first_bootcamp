@@ -23,7 +23,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
 with st.sidebar :
-    image = Image.open('images/invytack.png')
+    image = Image.open('https://github.com/vaniebermudez/ai_first_bootcamp/blob/main/Day4/images/invytrack.png')
     st.image(image)
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
     if not (openai.api_key.startswith('sk-') and len(openai.api_key)==164):
