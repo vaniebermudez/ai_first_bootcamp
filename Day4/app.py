@@ -24,9 +24,47 @@ warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
-with st.sidebar :
+# First, define the initialize_rag function
+def initialize_rag():
+    # Load and process the inventory dataset
+    loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')
+    documents = loader.load()
+    
+    # Split documents into chunks
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    splits = text_splitter.split_documents(documents)
+    
+    # Create embeddings and vector store
+    embeddings = OpenAIEmbeddings()
+    vectorstore = FAISS.from_documents(splits, embeddings)
+    
+    return vectorstore
+
+# Then define initialize_conversation
+def initialize_conversation(prompt):
+    if 'message' not in st.session_state:
+        st.session_state.message = []
+        st.session_state.message.append({"role": "system", "content": System_Prompt})
+        
+    # Initialize RAG components if not already initialized
+    if 'vectorstore' not in st.session_state:
+        st.session_state.vectorstore = initialize_rag()
+    
+    # Initialize qa_chain if not already initialized
+    if 'qa_chain' not in st.session_state:
+        # Create ChatOpenAI instance
+        llm = ChatOpenAI(model="gpt-4", temperature=0.5)
+        
+        # Create ConversationalRetrievalChain
+        st.session_state.qa_chain = ConversationalRetrievalChain.from_llm(
+            llm=llm,
+            retriever=st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3}),
+            return_source_documents=True,
+        )
+
+with st.sidebar:
     try:
-        st.image('/images/invytrack.png')
+        st.image('images/invytrack.png')
     except:
         st.title("InvyTrack")  # Fallback title if image is missing
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
@@ -115,27 +153,6 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
 """
 
 
-     def initialize_conversation(prompt):
-         if 'message' not in st.session_state:
-             st.session_state.message = []
-             st.session_state.message.append({"role": "system", "content": System_Prompt})
-             
-         # Initialize RAG components if not already initialized
-         if 'vectorstore' not in st.session_state:
-             st.session_state.vectorstore = initialize_rag()
-         
-         # Initialize qa_chain if not already initialized
-         if 'qa_chain' not in st.session_state:
-             # Create ChatOpenAI instance
-             llm = ChatOpenAI(model="gpt-4", temperature=0.5)
-             
-             # Create ConversationalRetrievalChain
-             st.session_state.qa_chain = ConversationalRetrievalChain.from_llm(
-                 llm=llm,
-                 retriever=st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3}),
-                 return_source_documents=True,
-             )
-
      initialize_conversation(System_Prompt)
 
      for messages in st.session_state.message :
@@ -167,18 +184,3 @@ Closing Note: Ensure each interaction ends with an offer for further assistance,
                         st.write(doc.page_content)
         
         st.session_state.message.append({"role": "assistant", "content": response})
-
-def initialize_rag():
-    # Load and process the inventory dataset
-    loader = CSVLoader('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')  # Replace with your CSV path
-    documents = loader.load()
-    
-    # Split documents into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-    splits = text_splitter.split_documents(documents)
-    
-    # Create embeddings and vector store
-    embeddings = OpenAIEmbeddings()
-    vectorstore = FAISS.from_documents(splits, embeddings)
-    
-    return vectorstore
