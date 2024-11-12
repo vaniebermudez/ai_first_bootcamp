@@ -16,13 +16,15 @@ import streamlit as st
 import warnings
 from streamlit_option_menu import option_menu
 from streamlit_extras.mention import mention
+from PIL import Image
 
 warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="InvyTrack: Your Smart Partner for Real-Time Inventory Precision", page_icon="", layout="wide")
 
 with st.sidebar :
-    st.image('https://github.com/vaniebermudez/ai_first_bootcamp/blob/main/Day4/images/invytrack.png')
+    image = Image.open('images/invytack.png')
+    st.image(image)
     openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
     if not (openai.api_key.startswith('sk-') and len(openai.api_key)==164):
         st.warning('Please enter your OpenAI API token!', icon='⚠️')
