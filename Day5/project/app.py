@@ -121,7 +121,7 @@ with st.sidebar:
    
     options = option_menu(
         "Dashboard", 
-        ["Home", "About Us", "SmartSellAI"],
+        ["Home", "About Me", "SmartSellAI"],
         icons = ['book', 'globe', 'tools'],
         menu_icon = "book", 
         default_index = 0,
