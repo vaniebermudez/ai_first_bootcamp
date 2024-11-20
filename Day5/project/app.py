@@ -213,7 +213,7 @@ elif options == "SmartSellAI":
             for messages in st.session_state.messagess :
                 if messages['role'] == 'system' : continue 
                 else :
-                with st.chat_message(messages["role"]):
+                    with st.chat_message(messages["role"]):
                         st.markdown(messages["content"])
 
             if user_message := st.chat_input("Say something"):
