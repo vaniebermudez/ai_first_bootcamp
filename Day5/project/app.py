@@ -48,7 +48,16 @@ if 'messagess' not in st.session_state:
 if 'chat_session' not in st.session_state:
     st.session_state.chat_session = None  # Placeholder for your chat session initialization
 
-# About Us Page
+# Home Page
+if options == "Home":
+    st.title("Welcome to SmarSell AI, your Automated Upselling and Cross-Selling AI")
+    st.write(" **SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
+    st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
+    st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
+    st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
+
+
+# About Me Page
 elif options == "About Me":
     st.title("About Me")
     my_image = Image.open("Day5/project/images/vanie.png")
@@ -143,13 +152,6 @@ Cross-Sell Suggestion: For a customer purchasing a high-end laptop, SmartSell AI
 Upsell Suggestion: A customer buying a basic subscription plan for a SaaS product might be suggested an upsell to a premium plan with additional features that align with their usage patterns.
 """
 
-# Home Page
-if options == "Home":
-    st.title("Welcome to SmarSell AI, your Automated Upselling and Cross-Selling AI")
-    st.write(" **SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
-    st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
-    st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
-    st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
 
 
 
