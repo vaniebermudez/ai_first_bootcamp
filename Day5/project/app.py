@@ -21,7 +21,7 @@ def generate_strat(data):
     historical_data_str = data.to_string(index=False)  # Convert DataFrame to string for better readability
 
     # Load and prepare data for RAG
-    dataframed = pd.read_csv('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')
+    dataframed = pd.read_csv('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day5/project/customer_purchase_xsell_upsell.csv')
     dataframed['combined'] = dataframed.apply(lambda row: ' '.join(row.values.astype(str)), axis=1)
     documents = dataframed['combined'].tolist()
 
@@ -158,15 +158,14 @@ elif options == "SmartSellAI":
     st.title("SmartSell AI")
     
     # Option for user to input data
-    data_input_method = st.selectbox("Input your data in CSV Format")
+    data_input_method = "Upload CSV"
 
-    if data_input_method == "Upload CSV":
-        uploaded_file = st.file_uploader("Upload your CSV data", type="csv")
-        if uploaded_file is not None:
-            data = pd.read_csv(uploaded_file)
-            st.write("Data Preview:", data.head())
-            # Create a dropdown for selecting the column to forecast
-            # sales_column = st.selectbox("Select the column to forecast:", data.columns)
+    uploaded_file = st.file_uploader("Upload your CSV data", type="csv")
+    if uploaded_file is not None:
+        data = pd.read_csv(uploaded_file)
+        st.write("Data Preview:", data.head())
+        # Create a dropdown for selecting the column to forecast
+        # sales_column = st.selectbox("Select the column to forecast:", data.columns)
         
 
     if 'data' in locals():
