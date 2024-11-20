@@ -145,7 +145,8 @@ if options == "Home":
 elif options == "About Me":
     st.title("About Me")
     my_image = Image.open("Day5/project/images/vanie.png")
-    st.image(my_image)
+    my_resized_image = my_image.resize((250,250))
+    st.image(my_resized_image)
     st.write("Vanessa Althea Bermudez")
     st.write("## AI Enthusiast / Data Scientist")
     st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
