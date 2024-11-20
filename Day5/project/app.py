@@ -106,8 +106,10 @@ Upsell Suggestion: A customer buying a basic subscription plan for a SaaS produc
 
 # Sidebar for API key and options
 with st.sidebar:
-    st.image('Day5/project/images/smartsell.png')
-    st.header("Settings")
+    logo_image = Image.open("Day5/project/images/smartsell.png")
+    logo_resized_image = logo_image.resize((40,40))
+    st.image(logo_resized_image)
+
     api_key = st.text_input('Enter OpenAI API token:', type='password')
     
     # Check if the API key is valid
@@ -123,11 +125,13 @@ with st.sidebar:
     st.write("3. Input your historical data.")
     st.write("4. Click 'Recommend Strategy' to see the cross-sell and up-sell strategies.")
 
+    if st.button("Reset"):
+        st.session_state.clear()
    
     options = option_menu(
         "Dashboard", 
         ["Home", "About Me", "SmartSellAI"],
-        icons = ['book', 'globe', 'tools'],
+        icons = ['book', 'man', 'tools'],
         menu_icon = "book", 
         default_index = 0,
         styles = {
