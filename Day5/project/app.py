@@ -119,11 +119,6 @@ with st.sidebar:
     else:
         st.warning('Please enter a valid OpenAI API token!', icon='⚠️')
 
-    st.header("Instructions")
-    st.write("1. Enter a valid OpenAI API Key.")
-    st.write("2. Click SmartSell AI on the Sidebar to get started!")
-    st.write("3. Input your historical data.")
-    st.write("4. Click 'Recommend Strategy' to see the cross-sell and up-sell strategies.")
 
     if st.button("Reset"):
         st.session_state.clear()
@@ -143,11 +138,21 @@ with st.sidebar:
 
 # Home Page
 if options == "Home":
-    st.title("Welcome to SmarSell AI, your Automated Upselling and Cross-Selling AI")
+
+    st.title("Welcome to SmarSell AI!")
+    st.subheader("🌟Your Automated Upselling and Cross-Selling AI")
     st.write("SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
     st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
     st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
     st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
+
+    st.subheader("How to Use this app?")
+    st.write("1. Enter a valid OpenAI API Key.")
+    st.write("2. Click SmartSell AI on the sidebar.")
+    st.write("3. Input your historical data in CSV Format.")
+    st.write("4. Click 'Recommend Strategy' to see the cross-sell and up-sell strategies.")
+    st.write("4. Wait for strategy insights given by the app.")
+
 
 
 # About Me Page
@@ -161,6 +166,7 @@ elif options == "About Me":
     st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
     st.text("Github : https://github.com/vaniebermudez/")
     st.write("\n")
+
 
 # SmartSell AI Page
 elif options == "SmartSellAI":
