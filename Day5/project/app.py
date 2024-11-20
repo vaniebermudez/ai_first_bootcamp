@@ -118,18 +118,19 @@ with st.sidebar:
     st.write("3. Input your historical data.")
     st.write("4. Click 'Recommendations' to see the cross-sell and up-sell strategies.")
 
+   
     options = option_menu(
-        "Content",
+        "Dashboard", 
         ["Home", "About Us", "SmartSellAI"],
-        default_index=0
-    )
+        icons = ['book', 'globe', 'tools'],
+        menu_icon = "book", 
+        default_index = 0,
+        styles = {
+            "icon" : {"color" : "#dec960", "font-size" : "20px"},
+            "nav-link" : {"font-size" : "17px", "text-align" : "left", "margin" : "5px", "--hover-color" : "#262730"},
+            "nav-link-selected" : {"background-color" : "#262730"}          
+        })
 
-# Initialize session state for messages
-if 'messagess' not in st.session_state:
-    st.session_state.messagess = []
-
-if 'chat_session' not in st.session_state:
-    st.session_state.chat_session = None  # Placeholder for your chat session initialization
 
 # Home Page
 if options == "Home":
