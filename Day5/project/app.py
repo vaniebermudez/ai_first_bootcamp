@@ -139,7 +139,7 @@ with st.sidebar:
 # Home Page
 if options == "Home":
 
-    st.title("Welcome to SmarSell AI!")
+    st.title("Welcome to SmartSell AI!")
     st.subheader("🌟Your Automated Upselling and Cross-Selling AI")
     st.write("SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
     st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
