@@ -183,6 +183,6 @@ elif options == "SmartSellAI":
 
     if 'data' in locals():
         if st.button("Recommend Strategy"):
-            strat = generate_strat(data)
             st.write("Generating strategy...")
+            strat = generate_strat(data)
             st.write(strat)
