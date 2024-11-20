@@ -73,13 +73,7 @@ def generate_strat(data):
     
     return response['choices'][0]['message']['content']
 
-def initialize_conversation(prompt):
-    if 'messagess' not in st.session_state:
-        st.session_state.messagess = []
-        st.session_state.messagess.append({"role": "system", "content": System_Prompt})
-        chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess, temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
-        response = chat.choices[0].message.content
-        st.session_state.messagess.append({"role": "assistant", "content": response})
+
 
 System_Prompt = """
 Role:
@@ -150,14 +144,6 @@ with st.sidebar:
 
 
 
-
-if 'messagess' not in st.session_state:
-    st.session_state.messagess = []
-
-if 'chat_session' not in st.session_state:
-    st.session_state.chat_session = None  # Placeholder for your chat session initialization
-
-
 # Home Page
 if options == "Home":
 
@@ -207,27 +193,3 @@ elif options == "SmartSellAI":
             st.write("Generating strategy...")
             strat = generate_strat(data)
             st.write(strat)
-
-            initialize_conversation(System_Prompt)
-
-            for messages in st.session_state.messagess :
-                if messages['role'] == 'system' : continue 
-                else :
-                    with st.chat_message(messages["role"]):
-                        st.markdown(messages["content"])
-
-            if user_message := st.chat_input("Say something"):
-                with st.chat_message("user"):
-                    st.markdown(user_message)
-                query_embedding = get_embedding(user_message, engine='text-embedding-3-small')
-                query_embedding_np = np.array([query_embedding]).astype('float32')
-                _, indices = index.search(query_embedding_np, 20)
-                retrieved_docs = [documents[i] for i in indices[0]]
-                context = ' '.join(retrieved_docs)
-                structured_prompt = f"Context:\n{context}\n\nQuery:\n{user_message}\n\nResponse:"
-                chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess + [{"role": "user", "content": structured_prompt}], temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
-                st.session_state.messagess.append({"role": "user", "content": user_message})
-                response = chat.choices[0].message.content
-                with st.chat_message("assistant"):
-                    st.markdown(response)
-                st.session_state.messagess.append({"role": "assistant", "content": response})
