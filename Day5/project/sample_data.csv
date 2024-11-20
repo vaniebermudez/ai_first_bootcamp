@@ -1,0 +1,21 @@
+﻿Customer ID,Product ID,Product Category,Product Name,Purchase Date,Quantity Purchased,Price Per Unit,Total Purchase Amount,Payment Method,Channel of Purchase,Repeat Purchase Indicator,Promotion Used,Feedback Score
+C001,P101,Electronics,Smartwatch,11/01/2024,1,$250,$250,Credit Card,Online,Yes,No,4.5
+C002,P102,Accessories,Phone Case,11/02/2024,2,$20,$40,Debit Card,In-Store,No,Yes,4
+C003,P103,Accessories,Wireless Mouse,11/03/2024,1,$30,$30,Credit Card,Online,No,No,4.3
+C004,P104,Home Appliances,Air Purifier,11/04/2024,1,$120,$120,Credit Card,In-Store,Yes,No,4.7
+C005,P105,Electronics,Bluetooth Speaker,11/05/2024,1,$150,$150,Debit Card,Mobile App,No,Yes,4.4
+C006,P106,Electronics,Tablet,11/06/2024,1,$350,$350,Credit Card,Online,Yes,No,4.6
+C007,P107,Home Appliances,Coffee Maker,11/07/2024,1,$80,$80,PayPal,In-Store,Yes,Yes,4.2
+C008,P108,Accessories,Laptop Bag,11/08/2024,1,$45,$45,Credit Card,Online,No,No,3.9
+C009,P109,Electronics,Headphones,11/09/2024,2,$100,$200,Debit Card,In-Store,Yes,Yes,4.5
+C010,P110,Electronics,Smartwatch,11/10/2024,1,$200,$200,Credit Card,Online,No,No,4.1
+C011,P111,Home Appliances,Vacuum Cleaner,11/11/2024,1,$150,$150,PayPal,Mobile App,No,Yes,4.3
+C012,P112,Accessories,Power Bank,11/12/2024,3,$30,$90,Debit Card,In-Store,Yes,No,4.6
+C013,P113,Electronics,Laptop,11/13/2024,1,$900,$900,Credit Card,Online,Yes,No,4.8
+C014,P114,Home Appliances,Microwave Oven,11/14/2024,1,$120,$120,PayPal,In-Store,No,Yes,4.4
+C015,P115,Electronics,Gaming Console,11/15/2024,1,$400,$400,Credit Card,Mobile App,Yes,No,4.7
+C016,P116,Home Appliances,Blender,11/16/2024,1,$60,$60,Debit Card,Online,Yes,Yes,4.2
+C017,P117,Electronics,Smart Speaker,11/17/2024,1,$120,$120,PayPal,In-Store,No,No,4.3
+C018,P118,Accessories,USB-C Cable,5,1,$15,$15,Credit Card,Online,No,Yes,4
+C019,P119,Electronics,Drone,11/18/2024,1,$500,$500,Credit Card,Mobile App,No,No,4.6
+C020,P120,Home Appliances,Electric Grill,11/19/2024,1,$130,$130,Debit Card,In-Store,Yes,Yes,4.4
