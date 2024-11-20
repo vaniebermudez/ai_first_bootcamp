@@ -32,6 +32,8 @@ def generate_strat(data):
     index = faiss.IndexFlatL2(embedding_dim)
     index.add(embeddings_np)
 
+    user_message = 'Based on the purchase history of our users, what are the top cross-selling opportunities for customers who have recently bought in mobile app?'
+
     # Generate embedding for the forecast string
     query_embedding = get_embedding(user_message, engine='text-embedding-3-small')
     query_embedding_np = np.array([query_embedding]).astype('float32')
