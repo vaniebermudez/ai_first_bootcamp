@@ -107,9 +107,7 @@ Upsell Suggestion: A customer buying a basic subscription plan for a SaaS produc
 
 # Sidebar for API key and options
 with st.sidebar:
-    logo_image = Image.open("Day5/project/images/smartsell.png")
-    logo_resized_image = logo_image.resize((100,100))
-    st.image(logo_resized_image)
+    st.image("Day5/project/images/smartsell.png")
 
     api_key = st.text_input('Enter OpenAI API token:', type='password')
     
