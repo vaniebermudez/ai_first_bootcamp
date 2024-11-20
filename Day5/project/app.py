@@ -16,60 +16,6 @@ warnings.filterwarnings("ignore")
 st.set_page_config(page_title="SmartSell AI", layout="wide")
 
 
-# Sidebar for API key and options
-with st.sidebar:
-    st.image('Day5/project/images/smartsell.png')
-    st.header("Settings")
-    api_key = st.text_input('Enter OpenAI API token:', type='password')
-    
-    # Check if the API key is valid
-    if api_key and api_key.startswith('sk-'):  # Removed length check
-        openai.api_key = api_key
-        st.success('API key is valid. Proceed to enter your shipment details!', icon='👉')
-    else:
-        st.warning('Please enter a valid OpenAI API token!', icon='⚠️')
-
-    st.header("Instructions")
-    st.write("1. Enter a valid OpenAI API Key.")
-    st.write("2. Click SmartSell AI on the Sidebar to get started!")
-    st.write("3. Input your historical data.")
-    st.write("4. Click 'Recommendations' to see the cross-sell and up-sell strategies.")
-
-    options = option_menu(
-        "Content",
-        ["Home", "About Us", "SmartSellAI"],
-        default_index=0
-    )
-
-# Initialize session state for messages
-if 'messagess' not in st.session_state:
-    st.session_state.messagess = []
-
-if 'chat_session' not in st.session_state:
-    st.session_state.chat_session = None  # Placeholder for your chat session initialization
-
-# Home Page
-if options == "Home":
-    st.title("Welcome to SmarSell AI, your Automated Upselling and Cross-Selling AI")
-    st.write(" **SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
-    st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
-    st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
-    st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
-
-
-# About Me Page
-elif options == "About Me":
-    st.title("About Me")
-    my_image = Image.open("Day5/project/images/vanie.png")
-    st.image(my_image)
-    st.write("Vanessa Althea Bermudez")
-    st.write("## AI Enthusiast / Data Scientist")
-    st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
-    st.text("Github : https://github.com/vaniebermudez/")
-    st.write("\n")
-
-
-
 def generate_strat(data):
     # Prepare the historical data for the prompt
     historical_data_str = data.to_string(index=False)  # Convert DataFrame to string for better readability
@@ -153,9 +99,59 @@ Upsell Suggestion: A customer buying a basic subscription plan for a SaaS produc
 """
 
 
+# Sidebar for API key and options
+with st.sidebar:
+    st.image('Day5/project/images/smartsell.png')
+    st.header("Settings")
+    api_key = st.text_input('Enter OpenAI API token:', type='password')
+    
+    # Check if the API key is valid
+    if api_key and api_key.startswith('sk-'):  # Removed length check
+        openai.api_key = api_key
+        st.success('API key is valid. Proceed to enter your shipment details!', icon='👉')
+    else:
+        st.warning('Please enter a valid OpenAI API token!', icon='⚠️')
+
+    st.header("Instructions")
+    st.write("1. Enter a valid OpenAI API Key.")
+    st.write("2. Click SmartSell AI on the Sidebar to get started!")
+    st.write("3. Input your historical data.")
+    st.write("4. Click 'Recommendations' to see the cross-sell and up-sell strategies.")
+
+    options = option_menu(
+        "Content",
+        ["Home", "About Us", "SmartSellAI"],
+        default_index=0
+    )
+
+# Initialize session state for messages
+if 'messagess' not in st.session_state:
+    st.session_state.messagess = []
+
+if 'chat_session' not in st.session_state:
+    st.session_state.chat_session = None  # Placeholder for your chat session initialization
+
+# Home Page
+if options == "Home":
+    st.title("Welcome to SmarSell AI, your Automated Upselling and Cross-Selling AI")
+    st.write(" **SmartSell AI is a cutting-edge system designed to optimize upselling and cross-selling opportunities using advanced analytics on user data and purchasing history.")
+    st.write("Tailored for sales and marketing teams, as well as founders, it empowers businesses to boost revenue per customer through targeted, automated strategies.")
+    st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
+    st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
 
 
-# Forecast Page
+# About Me Page
+elif options == "About Me":
+    st.title("About Me")
+    my_image = Image.open("Day5/project/images/vanie.png")
+    st.image(my_image)
+    st.write("Vanessa Althea Bermudez")
+    st.write("## AI Enthusiast / Data Scientist")
+    st.text("Connect with me via Linkedin : https://www.linkedin.com/in/vaniebermudez/")
+    st.text("Github : https://github.com/vaniebermudez/")
+    st.write("\n")
+
+# SmartSell AI Page
 elif options == "SmartSellAI":
     st.title("SmartSell AI")
     
