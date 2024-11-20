@@ -12,4 +12,8 @@ Activity 6: https://aifirstbootcamp-surepath-urfinancialguide.streamlit.app/
 
 Day 4
 
-Activity 2:
+Activity 2:https://aifirstbootcamp-invytrack-try.streamlit.app/
+
+Day 5
+
+Project: https://aifirstbootcamp-smartsellai.streamlit.app/
