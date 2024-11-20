@@ -148,6 +148,12 @@ if options == "Home":
     st.write("Ideal for industries like e-commerce, fintech, and SaaS, SmartSell AI helps businesses capitalize on key growth drivers, such as increasing the average revenue per user.")
     st.write("With its intelligent recommendations and actionable insights, SmartSell AI simplifies complex sales processes and accelerates revenue growth.")
 
+    st.subheader("What is Up-selling?")
+    st.write("Up-selling is the practice of encouraging the customer to purchase a more expensive version or an upgraded model of the product they are considering. The goal is to convince the customer to spend more by offering a higher-end option with additional features or benefits.")
+
+    st.subheader("What is Cross-selling?")
+    st.write("Cross-selling involves suggesting additional products or services that complement or enhance the item the customer is already purchasing. The goal is to offer items that are related or useful in conjunction with the initial product, increasing the total value of the sale.")
+
     st.subheader("How to Use this app?")
     st.write("1. Enter a valid OpenAI API Key.")
     st.write("2. Click SmartSell AI on the sidebar.")
