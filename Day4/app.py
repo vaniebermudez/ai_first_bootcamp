@@ -37,7 +37,7 @@ with st.sidebar :
 
     options = option_menu(
         "Dashboard", 
-        ["Home", "About Us", "Model"],
+        ["Home", "About Me", "Model"],
         icons = ['book', 'globe', 'tools'],
         menu_icon = "book", 
         default_index = 0,
