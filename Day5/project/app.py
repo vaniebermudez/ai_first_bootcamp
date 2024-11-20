@@ -173,21 +173,22 @@ elif options == "SmartSellAI":
     if 'data' in locals():
         if st.button("Recommend Strategy"):
             strat = generate_strat(data)
+            st.write(strat)
 
-    def initialize_conversation(prompt):
-        if 'messagess' not in st.session_state:
-            st.session_state.messagess = []
-            st.session_state.messagess.append({"role": "system", "content": System_Prompt})
-            chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess, temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
-            response = chat.choices[0].message.content
-            st.session_state.messagess.append({"role": "assistant", "content": response})
+    # def initialize_conversation(prompt):
+    #     if 'messagess' not in st.session_state:
+    #         st.session_state.messagess = []
+    #         st.session_state.messagess.append({"role": "system", "content": System_Prompt})
+    #         chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess, temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
+    #         response = chat.choices[0].message.content
+    #         st.session_state.messagess.append({"role": "assistant", "content": response})
 
-    initialize_conversation(System_Prompt)
+    # initialize_conversation(System_Prompt)
 
-    for messages in st.session_state.messagess :
-        if messages['role'] == 'system' : continue 
-        else :
-            with st.chat_message(messages["role"]):
-                    st.markdown(messages["content"])
+    # for messages in st.session_state.messagess :
+    #     if messages['role'] == 'system' : continue 
+    #     else :
+    #         with st.chat_message(messages["role"]):
+    #                 st.markdown(messages["content"])
 
 
