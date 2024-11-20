@@ -61,10 +61,9 @@ elif options == "About Me":
 
 
 
-def generate_strat(data, user_message):
+def generate_strat(data):
     # Prepare the historical data for the prompt
     historical_data_str = data.to_string(index=False)  # Convert DataFrame to string for better readability
-    user_message = ', '.join(map(str, forecast)) 
 
     # Load and prepare data for RAG
     dataframed = pd.read_csv('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day4/inventory_products_dataset.csv')
