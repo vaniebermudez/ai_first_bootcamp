@@ -1,0 +1,12 @@
+openai == 0.28
+numpy
+pandas
+faiss-cpu
+streamlit
+streamlit-option-menu
+Pillow
+matplotlib
+langchain-community
+plotly
+scipy
+scikit-learn
