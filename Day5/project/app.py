@@ -13,12 +13,12 @@ import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
 
-st.set_page_config(page_title="SmartSell AI", layout="wide")
+st.set_page_config(page_title="SmartSell AI: Boost Sales, Elevate Strategies", layout="wide")
 
 
 def generate_strat(data):
     # Prepare the historical data for the prompt
-    historical_data_str = data.to_string(index=False)  # Convert DataFrame to string for better readability
+    historical_data_str = data.to_string(index=False)  
 
     # Load and prepare data for RAG
     dataframed = pd.read_csv('https://raw.githubusercontent.com/vaniebermudez/ai_first_bootcamp/refs/heads/main/Day5/project/customer_purchase_xsell_upsell.csv')
@@ -32,9 +32,9 @@ def generate_strat(data):
     index = faiss.IndexFlatL2(embedding_dim)
     index.add(embeddings_np)
 
-    user_message = 'Based on the purchase history of our users, what are the top cross-selling opportunities for customers who have recently bought in mobile app?'
+    user_message = 'Based on the purchase history of our users, what are the top cross-selling opportunities for customers? Categorize customers to specific groups.'
 
-    # Generate embedding for the forecast string
+    # Generate embedding
     query_embedding = get_embedding(user_message, engine='text-embedding-3-small')
     query_embedding_np = np.array([query_embedding]).astype('float32')
 
@@ -52,6 +52,8 @@ def generate_strat(data):
     
     2. Use the following context to enhance your analysis and explanation, but do not assume it is directly related to the user's input data:
     {context}
+
+    3. Categorize prominent customer groups and suggest strategies based on different customer groups.
     """
 
     response = openai.ChatCompletion.create(
@@ -98,6 +100,7 @@ User Data: A customer who frequently buys fitness equipment may be recommended a
 Cross-Sell Suggestion: For a customer purchasing a high-end laptop, SmartSell AI may suggest complementary items such as laptop bags, external hard drives, or premium software subscriptions.
 
 Upsell Suggestion: A customer buying a basic subscription plan for a SaaS product might be suggested an upsell to a premium plan with additional features that align with their usage patterns.
+
 """
 
 
@@ -166,29 +169,10 @@ elif options == "SmartSellAI":
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
         st.write("Data Preview:", data.head())
-        # Create a dropdown for selecting the column to forecast
-        # sales_column = st.selectbox("Select the column to forecast:", data.columns)
         
 
     if 'data' in locals():
         if st.button("Recommend Strategy"):
             strat = generate_strat(data)
+            st.write("Generating strategy...")
             st.write(strat)
-
-    def initialize_conversation(prompt):
-        if 'messagess' not in st.session_state:
-            st.session_state.messagess = []
-            st.session_state.messagess.append({"role": "system", "content": System_Prompt})
-            chat =  openai.ChatCompletion.create(model = "gpt-4o-mini", messages = st.session_state.messagess, temperature=0.5, max_tokens=1500, top_p=1, frequency_penalty=0, presence_penalty=0)
-            response = chat.choices[0].message.content
-            st.session_state.messagess.append({"role": "assistant", "content": response})
-
-    initialize_conversation(System_Prompt)
-
-    for messages in st.session_state.messagess :
-        if messages['role'] == 'system' : continue 
-        else :
-            with st.chat_message(messages["role"]):
-                    st.markdown(messages["content"])
-
-
