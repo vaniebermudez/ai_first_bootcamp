@@ -1,0 +1,4 @@
+﻿Product ID,Product Name,Stock Level,Reorder Level,Restock Lead Time (days)
+PROD2001,Widget A,150,100,7
+PROD2002,Gizmo B,5,20,14
+PROD2003,Component C,60,50,5
